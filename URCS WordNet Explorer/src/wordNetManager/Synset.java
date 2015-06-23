@@ -24,7 +24,6 @@ package wordNetManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 

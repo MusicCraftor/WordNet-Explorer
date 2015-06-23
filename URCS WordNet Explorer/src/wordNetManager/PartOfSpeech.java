@@ -22,7 +22,6 @@
 
 package wordNetManager;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 

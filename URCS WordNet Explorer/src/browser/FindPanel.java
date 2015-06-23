@@ -368,7 +368,6 @@ public class FindPanel extends JPanel implements ActionListener, DocumentListene
     protected Element getChildElement(Element parent, Object name) {
 	for (int i=0; i < parent.getElementCount(); i++) {
 	    Element child = parent.getElement(i);
-	    AttributeSet attrs = child.getAttributes();
 	    if (getElementName(child) == name) {
 		return child;
 	    }
@@ -501,7 +500,7 @@ public class FindPanel extends JPanel implements ActionListener, DocumentListene
 
 
 
-    public static void main(String[] argv) {
+    /*public static void main(String[] argv) {
 	JFrame frame = new JFrame("Test FindPanel");
 	Container content = frame.getContentPane();
 	content.setLayout(new BorderLayout());
@@ -525,7 +524,7 @@ public class FindPanel extends JPanel implements ActionListener, DocumentListene
 		     "<a href=\"hello\">Hello</a> world. I am here. Hello <a href=\"world\">world</a>. Goodbye world.\n" +
 		     "Hello world. I am here. Hello world. Goodbye world.\n"
 		     );
-	*/
+	//
 	// Read test doc from file (but still use setText() to set it)
 	StringBuilder buf = new StringBuilder();
 	try {
@@ -568,5 +567,5 @@ public class FindPanel extends JPanel implements ActionListener, DocumentListene
 
 	frame.pack();
 	frame.setVisible(true);
-    }
+    }*/
 }

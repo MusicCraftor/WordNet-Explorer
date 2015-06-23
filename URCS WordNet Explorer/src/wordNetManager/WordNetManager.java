@@ -24,14 +24,10 @@ package wordNetManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.PushbackReader;
-import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -355,7 +351,6 @@ public class WordNetManager {
      */
     public static void main(String[] argv) throws IOException {
 	WordNetManager manager = new WordNetManager();
-	PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out));
 	/*
 	manager.loadIndices();
 	manager.dump(output);

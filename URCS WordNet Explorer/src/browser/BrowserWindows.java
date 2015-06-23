@@ -22,10 +22,7 @@
 
 package browser;
 
-import java.awt.SplashScreen;
 import java.awt.event.*;
-import java.io.IOException;
-
 import javax.swing.*;
 //import com.apple.eawt.*;
 
