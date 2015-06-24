@@ -48,7 +48,7 @@ public class WordNetManager {
      */
     public static final String WNHOME_DEFAULT = 
 	(File.separatorChar == '\\' ?
-	 "C:\\Program Files\\WordNet\\3.0" : "/usr/local/WordNet-3.0");
+	 ".\\res\\WordNet-3.0" : "/usr/local/WordNet-3.0");
     /**
      * The default directory in which the WordNet database has been installed.
      * @see http://wordnet.princeton.edu/wordnet/man/wnintro.1WN.html
