@@ -32,6 +32,10 @@ import javax.swing.*;
 public class BrowserWindows extends Browser {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Entry point for the BrowserWindows class.
      * Simply sets the look and feel to Windows and then does
      * what Browser.main() does to start the app.

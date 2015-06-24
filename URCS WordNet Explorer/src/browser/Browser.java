@@ -40,7 +40,11 @@ import wordNetManager.*;
  */
 public class Browser extends JFrame implements ActionListener, ItemListener, HyperlinkListener, Runnable, PreferenceChangeListener, WordNetManagerListener {
 
-    protected WordNetManager manager;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected WordNetManager manager;
     protected JPanel content;
     protected JTextField inputTF;
     protected JTextPane outputTP;

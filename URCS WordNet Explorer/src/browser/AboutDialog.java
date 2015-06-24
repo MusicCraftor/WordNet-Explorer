@@ -33,7 +33,11 @@ import javax.swing.*;
  */
 public class AboutDialog extends JDialog {
 
-    protected static final String SPLASH = "/URCSWordNetBrowser-splash.png";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final String SPLASH = "/URCSWordNetBrowser-splash.png";
 
 
     public AboutDialog(Frame parent) {

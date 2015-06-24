@@ -30,6 +30,11 @@ import javax.swing.*;
 public class PrefsDialog extends JDialog implements ActionListener {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * The tabs displayed in this PrefsDialog, each of which holds a PrefsPanel.
      */
     protected JTabbedPane tabs;

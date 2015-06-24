@@ -27,6 +27,11 @@ import javax.swing.JPanel;
 abstract public class PrefsPanel extends JPanel {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Construct and return a new PrefsPanel for manipulating the
      * given Prefs.
      */

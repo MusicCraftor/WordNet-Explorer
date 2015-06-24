@@ -21,7 +21,11 @@ import wordNetManager.*;
  */
 public class WordNetPrefsPanel extends PrefsPanel implements ActionListener, HierarchyListener {
 
-    protected JLabel currentWNLocation;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected JLabel currentWNLocation;
     protected JLabel currentWNMissing;
     protected JRadioButton radioWNChoose;
     protected JButton chooseButton;

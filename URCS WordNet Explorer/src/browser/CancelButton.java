@@ -34,7 +34,11 @@ import javax.swing.ImageIcon;
  */
 public class CancelButton extends JButton {
 
-    protected static ImageIcon CANCEL_ICON;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static ImageIcon CANCEL_ICON;
 
     {
 	if (Platform.RUNNING_ON_OSX) {

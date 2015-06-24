@@ -24,7 +24,6 @@ package browser;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -51,6 +50,10 @@ import javax.swing.text.html.*;
 public class FindPanel extends JPanel implements ActionListener, DocumentListener {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * The JTextComponent that this FindPanel is searching.
      */
     protected JTextComponent pane;
