@@ -2,11 +2,13 @@ package browser;
 
 import java.awt.event.*;
 import java.awt.*;
+
 import javax.swing.*;
 
 
+@SuppressWarnings("serial")
 public class AboutDialog extends JDialog{
-	private JTextArea text=new JTextArea("About: ColorfulWord\nAuthor: 刘智猷  张泰之  徐源盛  安传凯\nVersion：0.999\n");
+	private JTextArea text=new JTextArea("About: ColorfulWord\nAuthor: 鍒樻櫤鐚�  寮犳嘲涔�  寰愭簮鐩�  瀹変紶鍑痋nVersion锛�0.999\n");
 	private JButton button=new JButton("Confirm");
 	AboutDialog(Frame owner){
 		super(owner,"About",true);

@@ -9,56 +9,28 @@
 
 package graph;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Shape;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
-import java.awt.print.Printable;
-import java.io.File;
-import java.text.AttributedCharacterIterator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
 import javax.swing.JApplet;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 
-import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.collections15.functors.ConstantTransformer;
-import org.apache.commons.collections15.functors.MapTransformer;
-import org.apache.commons.collections15.map.LazyMap;
-import org.w3c.dom.events.MouseEvent;
 
 import coloring.ColorManager;
-
 import wndata.DataManager;
 import wndata.PartOfSpeech;
 import wndata.Synset;
 import wndata.SynsetPointer;
-
 import edu.uci.ics.jung.algorithms.layout.AbstractLayout;
-import edu.uci.ics.jung.algorithms.layout.BalloonLayout;
 import edu.uci.ics.jung.algorithms.layout.SpringLayout;
-import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.algorithms.layout.util.Relaxer;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
@@ -67,14 +39,8 @@ import edu.uci.ics.jung.graph.util.Graphs;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.VisualizationViewer.GraphMouse;
-import edu.uci.ics.jung.visualization.control.AbstractModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.GraphMouseListener;
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.ModalLensGraphMouse;
-import edu.uci.ics.jung.visualization.control.ScalingControl;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 
@@ -88,10 +54,11 @@ import edu.uci.ics.jung.visualization.renderers.Renderer;
  * @author Tom Nelson
  * 
  */
+@SuppressWarnings("serial")
 public class GraphExplorer extends JApplet {
 
 
-    Graph<Gnode,Gedge> graph;
+	Graph<Gnode,Gedge> graph;
     
     AbstractLayout<Gnode,Gedge> layout;
 
@@ -109,7 +76,8 @@ public class GraphExplorer extends JApplet {
      * create a graph.
      * 
      */
-    public GraphExplorer(Synset synset,boolean[] p) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public GraphExplorer(Synset synset,boolean[] p) {
         
         // create a simple graph for the demo
 //        graph = new SparseMultigraph<Gnode,String>();
@@ -209,8 +177,7 @@ public class GraphExplorer extends JApplet {
         relaxer.resume();
         getContentPane().add(vv);
     }
-    @SuppressWarnings("serial")
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Synset start =DataManager.getSingleton().lookup("hire", PartOfSpeech.forChar('n'))[0];

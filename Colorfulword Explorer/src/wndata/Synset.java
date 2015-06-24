@@ -2,10 +2,9 @@ package wndata;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-//LZYNOTE:瀹冨湪鏋勯��犺繖浜涗笢瑗跨殑鏃跺��欑敤鐨勬槸涓��涓猺ead鏂规硶浠庡叾灏佽鐨刉ordNetFileReader绫讳腑璇绘暟鎹紝浣犲彲浠ユ妸杩欎釜WordNetFileReader鎼炴噦锛岄1�7敤�1�7�冪殑Read鏂规硶锛屾垨鑰呰嚜宸卞疄鐜颁竴涓鏁版嵁鐨勯��昏緫锛屽啀鍐欎竴涓�1�7�閫犲嚱鏁般����
+//LZYNOTE:鐎瑰啫婀弸鍕拷锟界姾绻栨禍娑楃鐟楄法娈戦弮璺猴拷锟芥瑧鏁ら惃鍕Ц娑擄拷锟芥稉鐚篹ad閺傝纭舵禒搴″従鐏忎浇顥栭惃鍒塷rdNetFileReader缁鑵戠拠缁樻殶閹诡噯绱濇担鐘插讲娴犮儲濡告潻娆庨嚋WordNetFileReader閹肩偞鍣﹂敍宀�1�7鏁ょ�1�7瑰啰娈慠ead閺傝纭堕敍灞惧灗閼板懓鍤滃鍗炵杽閻滈绔存稉顏囶嚢閺佺増宓侀惃鍕拷锟芥槒绶敍灞藉晙閸愭瑤绔存稉顏呯�1�7柅鐘插毐閺佽埇锟斤拷锟斤拷
 public class Synset {
 
     protected int offset;
@@ -20,7 +19,7 @@ public class Synset {
     protected SynsetFrame[] frames;
     protected String[] glosses;
     
-    public Synset()                            //���캯��
+    public Synset()                            //构造函数
     {
     	
     }

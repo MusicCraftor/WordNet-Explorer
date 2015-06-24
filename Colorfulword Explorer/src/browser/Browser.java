@@ -2,7 +2,6 @@ package browser;
 
 import graph.GraphExplorer;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -61,13 +60,15 @@ import wndata.SynsetPointer;
 import wndata.WordSense;
 import coloring.ColorManager;
 
+@SuppressWarnings("serial")
 public class Browser extends JFrame implements ActionListener, HyperlinkListener, ItemListener {
     protected DataManager manager;
     protected Trie trie;
     protected JTextField queryInput;
     protected JTextField searchInput;
     // protected JSuggestField queryInput;
-    protected JComboBox comboBox;
+    @SuppressWarnings("rawtypes")
+	protected JComboBox comboBox;
     protected JTextPane outputText;
     protected JButton forward,backward;
     protected JCheckBox[] posCheckBoxes;
@@ -107,7 +108,8 @@ public class Browser extends JFrame implements ActionListener, HyperlinkListener
         }
     }
 
-    public Browser() {
+    @SuppressWarnings("rawtypes")
+	public Browser() {
         manager = DataManager.getSingleton();
         trie = DataManager.getTrie();
         historyLink = new LinkedList<WordAndSynset>();
@@ -150,7 +152,6 @@ public class Browser extends JFrame implements ActionListener, HyperlinkListener
         comboBox = new JComboBox();
         comboBox.setPreferredSize(new Dimension(250,20));
         comboBox.setUI(new BasicComboBoxUI() {
-                @SuppressWarnings("serial")
                 @Override
                 protected JButton createArrowButton() {
                     return new JButton() {
@@ -557,7 +558,8 @@ public class Browser extends JFrame implements ActionListener, HyperlinkListener
                     System.out.println(historyLink);
                     Object[] result;
                     result = get();
-                    Map<PartOfSpeech,Synset[]> map = (Map<PartOfSpeech,Synset[]>) result[0];
+                    @SuppressWarnings("unchecked")
+					Map<PartOfSpeech,Synset[]> map = (Map<PartOfSpeech,Synset[]>) result[0];
                     HtmlPraser contentHtml = (HtmlPraser) result[1];
                     if (pos != null) {
                         lastHeadSynset = manager.getSynset(synsetOffset,pos);
@@ -919,7 +921,6 @@ public class Browser extends JFrame implements ActionListener, HyperlinkListener
         JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    @SuppressWarnings("serial")
     class MyDocument extends PlainDocument {
 
         public void insertString(int offs, String str, AttributeSet a) {
@@ -984,7 +985,8 @@ public class Browser extends JFrame implements ActionListener, HyperlinkListener
          * SwingWorker method invoked on the event dispatching thread to
          * display the results of the search.
          */
-        public void done() {
+        @SuppressWarnings("unchecked")
+		public void done() {
             try {
                 if (!isCancelled()) {
                     synchronized(comboBox) {

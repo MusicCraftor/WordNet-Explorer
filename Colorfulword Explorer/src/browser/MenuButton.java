@@ -3,12 +3,14 @@ package browser;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JPopupMenu;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
+@SuppressWarnings("serial")
 public class MenuButton extends JToggleButton{
     private JPopupMenu menu;
     public MenuButton(){

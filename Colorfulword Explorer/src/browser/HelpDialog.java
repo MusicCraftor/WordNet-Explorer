@@ -2,8 +2,10 @@ package browser;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class HelpDialog extends JDialog{
 	private JTextArea text=new JTextArea("Also See Documentation-_-y-~~~");
 	private JButton button=new JButton("Confirm");

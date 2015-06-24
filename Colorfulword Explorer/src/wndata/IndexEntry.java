@@ -2,12 +2,10 @@ package wndata;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /***
-    LZYNOTE:这个类用来代表一个Index条目。不过他实现的时候用的是丄1�7个Read方法生成数据，你也可以实现一个构造函敄1�7
+    LZYNOTE:杩欎釜绫荤敤鏉ヤ唬琛ㄤ竴涓狪ndex鏉＄洰銆備笉杩囦粬瀹炵幇鐨勬椂鍊欑敤鐨勬槸涓�1�7涓猂ead鏂规硶鐢熸垚鏁版嵁锛屼綘涔熷彲浠ュ疄鐜颁竴涓瀯閫犲嚱鏁�1�7
 ***/
 
 public class IndexEntry {
