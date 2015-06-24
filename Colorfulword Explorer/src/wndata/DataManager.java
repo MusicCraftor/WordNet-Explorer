@@ -48,10 +48,10 @@ public class DataManager implements ColorStoreInfo                              
 	  a_cache = new Synset[10000];                    //缂傛挸鐡�
 	  r_cache = new Synset[10000];                    //缂傛挸鐡�
 	 
-	 File n_index_file = new File("./dict/index.noun");                //閸ユ稐閲滅槐銏犵穿閻ㄥ嫮娴夌�电鐭惧锟�
-	 File v_index_file = new File("./dict/index.verb");
-	 File a_index_file = new File("./dict/index.adj");                 //create File by relative address
-	 File r_index_file = new File("./dict/index.adv");
+	 File n_index_file = new File("res/WordNet-3.0/dict/index.noun");                //閸ユ稐閲滅槐銏犵穿閻ㄥ嫮娴夌�电鐭惧锟�
+	 File v_index_file = new File("res/WordNet-3.0/dict/index.verb");
+	 File a_index_file = new File("res/WordNet-3.0/dict/index.adj");                 //create File by relative address
+	 File r_index_file = new File("res/WordNet-3.0/dict/index.adv");
 	 
 	 /*
 	 File n_index_file = new File("./dict/index.noun");                //閸ユ稐閲滅槐銏犵穿閻ㄥ嫮娴夌�电鐭惧锟�
@@ -118,7 +118,7 @@ public class DataManager implements ColorStoreInfo                              
 	 for(int i = 0;i < 4 ;i++)
 	 {
 		 //System.out.println("for");
-		 raf = new RandomAccessFile(index_file[i], "r");        
+		 raf = new RandomAccessFile(index_file[i], "r");     
 		 while(true)
 		 {
 			 //System.out.println("true");
@@ -287,23 +287,23 @@ public class DataManager implements ColorStoreInfo                              
 	     switch(pos)                //open corresponding data file 
 	     {
 	        case NOUN:
-	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("./dict/data.noun"),"r");
+	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("res/WordNet-3.0/dict/data.noun"),"r");
 	        break;
 	        
 	        case VERB:
-	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("./dict/data.verb"),"r");
+	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("res/WordNet-3.0/dict/data.verb"),"r");
 	        break;
 	        
 	        case ADV:
-	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("./dict/data.adv"),"r");
+	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("res/WordNet-3.0/dict/data.adv"),"r");
 	        break;
 	        
 	        case ADJ:
-	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("./dict/data.adj"),"r");
+	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("res/WordNet-3.0/dict/data.adj"),"r");
 	        break;
 	        
 	        case ADJS:
-	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("./dict/data.adj"),"r");
+	        	/*RandomAccessFile*/ raf = new RandomAccessFile(new File("res/WordNet-3.0/dict/data.adj"),"r");
 	        break;
 	        default:
 	            
