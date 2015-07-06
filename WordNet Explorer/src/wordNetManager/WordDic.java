@@ -1,4 +1,4 @@
-package wordNetParser;
+package wordNetManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
+
 
 
 import edu.mit.jwi.Dictionary;
@@ -77,7 +78,7 @@ public class WordDic {
 		initDic();
 		wordName = null;
 	}
-	protected void setWord(String wordname){
+	public void setWord(String wordname){
 	//	System.out.println(wordname);
 		wordName = wordname;
 
@@ -175,7 +176,7 @@ public class WordDic {
 			e.printStackTrace();
 		}
 	}
-	protected String getT(){
+	public String getT(){
 		if(wordName==null)return "";
 		String ret = "<html><body>";
 		ret+= "<center><h1><b>"+wordName.replaceAll("_", " ")+"</b></h1></center>";
@@ -192,6 +193,26 @@ public class WordDic {
 		}
 		ret+="</body></html>";
 		return ret;
+	}
+	public void setShow(int i, int j)
+	{
+		showExample[i][j] = !showExample[i][j];
+	}
+	/*
+	 * getMap
+	 * 返回所有关联词的map
+	 * map中的key值可以用map.get(WPane.TXX)(如 WPane.TSYNSET)进行检索,返回值为String[],即符合条件的词集合
+	 * 值得注意的是如果没有属于该属性的词则该词集不会出现在map中,如果调用map.get()会返回null,建议进行检查
+	 * 无参的getMap返回所有词集
+	 * 有参的getMap返回nType(nNOUN,nVERB,nADJ,nADV中一个)的第order个义项对应的map
+	 * 
+	 * 
+	 * */
+	public Map<String,String[]> getMap(){
+		return getTMap();
+	}
+	public Map<String,String[]> getMap(int nType,int order){
+		return getTMap(nType,order);
 	}
 	String parseSynset(ISynset synset){
 		String ret = "";
@@ -298,7 +319,7 @@ public class WordDic {
 		}
 		return ret;
 	}
-	protected int[] getPOS_NUM(){
+	public int[] getPOS_NUM(){
 		int[] ret = new int[wordIndexArray.length];
 		for(int i=0;i<wordIndexArray.length;++i){
 			if(wordIndexArray[i]!=null)
@@ -382,7 +403,7 @@ public class WordDic {
 		if(!ts.isEmpty())return ts;
 		return null;
 	}
-	protected boolean hasWord(String name){
+	public boolean hasWord(String name){
 		for(int i=0;)
 		return words.contains(name);
 	}

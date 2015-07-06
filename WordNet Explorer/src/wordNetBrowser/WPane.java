@@ -1,4 +1,4 @@
-package wordNetParser;
+package wordNetBrowser;
 
 import java.util.*;
 
@@ -8,13 +8,16 @@ import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import wordNetManager.WordDic;
+
 public class WPane extends JEditorPane {
 	public WPane(String wordname){
 		super();
 		initEditorPane();
 		initWord(wordname);
 		setText(wdic.getT());
-		setSelectionStart(0);setSelectionEnd(0);
+		setSelectionStart(0);
+		setSelectionEnd(0);
 		this.setEditable(false);
 		this.setContentType("text/html");
 	}
@@ -32,22 +35,6 @@ public class WPane extends JEditorPane {
 	}
 	public int getSynsetArray(int nType){
 		return getSynsetArray()[nType];
-	}
-	/*
-	 * getMap
-	 * 返回所有关联词的map
-	 * map中的key值可以用map.get(WPane.TXX)(如 WPane.TSYNSET)进行检索,返回值为String[],即符合条件的词集合
-	 * 值得注意的是如果没有属于该属性的词则该词集不会出现在map中,如果调用map.get()会返回null,建议进行检查
-	 * 无参的getMap返回所有词集
-	 * 有参的getMap返回nType(nNOUN,nVERB,nADJ,nADV中一个)的第order个义项对应的map
-	 * 
-	 * 
-	 * */
-	public Map<String,String[]> getMap(){
-		return wdic.getTMap();
-	}
-	public Map<String,String[]> getMap(int nType,int order){
-		return wdic.getTMap(nType,order);
 	}
 	/*
 	 *其必须实现HyperlinkListener接口
@@ -68,7 +55,7 @@ public class WPane extends JEditorPane {
 			int i = Integer.parseInt(t.substring(0, t.indexOf(',')));
 			t = t.substring(1+t.indexOf(','));
 			int j = Integer.parseInt(t);
-			wdic.showExample[i][j]=!wdic.showExample[i][j];//每次点击超链接时超链接会被点击两次(我也不知道为什么),本来bool型强行变成int
+			wdic.setShow(i, j);
 			int val=0;
 			val = getSelectionStart();
 			setText(wdic.getT());
