@@ -29,6 +29,8 @@ import edu.mit.jwi.item.Pointer;
 public class WordDic {
 	Map<String, String> map;
 	IDictionary dict;
+	String[] words;
+	int wordsTop=0;
 	String wordName;
 	IIndexWord wordIndexArray[];
 	boolean showExample[][] ;
@@ -101,6 +103,7 @@ public class WordDic {
 	    try{
 	    	 dict.open();
 	    }catch (Exception e){System.out.println("Can't open the Dictionary");e.printStackTrace();}
+	    words = new String[16000];
 	    map = new HashMap<String,String>();
 	    String fileName = path + File.separator +"verb.exc";
 	    FileInputStream inputStream = null;
@@ -146,6 +149,22 @@ public class WordDic {
 		    	ori = scanner.nextLine();
 		    	if(ori.indexOf(' ') > 0)ori = ori.substring(0,ori.indexOf(' '));
 		    	map.put(trans, ori);
+	    	}
+	    	inputStream.close();
+	    	scanner.close();
+	    	fileName = path + File.separator + "index.sense";
+	    	inputStream = new FileInputStream(fileName);
+	    	scanner = new Scanner(inputStream);
+	    	String lastWord = scanner.nextLine();
+	    	lastWord = lastWord.substring(0,lastWord.indexOf('%'));
+	    	String thisWord;
+	    	words[wordsTop++]=lastWord;
+	    	while(scanner.hasNext()){
+		    	thisWord = scanner.nextLine();
+		    	thisWord = thisWord.substring(0,thisWord.indexOf('%'));
+		    	if(thisWord.equals(lastWord))continue;
+		    	words[wordsTop++]=thisWord;
+		    	lastWord = thisWord;
 	    	}
 	    	inputStream.close();
 	    	scanner.close();
@@ -364,7 +383,7 @@ public class WordDic {
 		return null;
 	}
 	protected boolean hasWord(String name){
-		return dict.getIndexWord(name, POS.ADJECTIVE)!=null||dict.getIndexWord(name, POS.ADVERB)!=null||dict.getIndexWord(name,POS.NOUN)!=null
-				||dict.getIndexWord(name,POS.VERB)!=null;
+		for(int i=0;)
+		return words.contains(name);
 	}
 }
