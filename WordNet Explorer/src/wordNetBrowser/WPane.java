@@ -84,6 +84,9 @@ public class WPane extends JEditorPane {
 	public boolean hasWord(String s){
 		return wdic.hasWord(s);
 	}
+	public WordDic getDic(){
+		return wdic;
+	}
 	/*
 	 * main:显示一个只有WPane的JFrame
 	 * 
@@ -99,6 +102,8 @@ public class WPane extends JEditorPane {
 		jf.add(jsp);
 		jf.setVisible(true);
 		jf.setSize(700,400);
+		String[] getW = dog.getDic().getNextWords("anothe",10);
+		for(String str:getW){System.out.println(str);}
 		//*/
 	}
 	private static final long serialVersionUID = 1L;

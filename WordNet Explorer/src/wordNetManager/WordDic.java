@@ -331,6 +331,14 @@ public class WordDic {
 	public String getWord(){
 		return wordName;
 	}
+	public String[] getNextWords(String word,int length){
+		int index = BSearch(word,0,wordsTop);
+		String ret[] = new String[length];
+		for(int i=0;i<length;++i){
+			ret[i]=words[index+i];
+		}
+		return ret;
+	}
 	private Map<String,Set<String>> getTMap(int nType,int nOrder,int n){
 		if(nType>=wordIndexArray.length)return null;
 		Map<String,Set<String>>ret = new HashMap<String, Set<String>>();
