@@ -104,7 +104,7 @@ public class WordDic {
 	    try{
 	    	 dict.open();
 	    }catch (Exception e){System.out.println("Can't open the Dictionary");e.printStackTrace();}
-	    words = new String[16000];
+	    words = new String[160000];
 	    map = new HashMap<String,String>();
 	    String fileName = path + File.separator +"verb.exc";
 	    FileInputStream inputStream = null;
@@ -328,6 +328,9 @@ public class WordDic {
 		}
 		return ret;
 	};
+	public String getWord(){
+		return wordName;
+	}
 	private Map<String,Set<String>> getTMap(int nType,int nOrder,int n){
 		if(nType>=wordIndexArray.length)return null;
 		Map<String,Set<String>>ret = new HashMap<String, Set<String>>();
@@ -403,8 +406,19 @@ public class WordDic {
 		if(!ts.isEmpty())return ts;
 		return null;
 	}
+	public String BSearch(String name){
+		return words[BSearch(name,0,wordsTop)];
+	}
+	int BSearch(String name,int start,int end){
+		int mid = (start+end)/2;
+		int val = name.compareTo(words[mid]);
+		if(val>0)return BSearch(name,mid+1,end);
+		if(val == 0||mid == start)return mid;
+		else return BSearch(name,start,mid);
+	}
 	public boolean hasWord(String name){
-		for(int i=0;)
-		return words.contains(name);
+		String lowerName = name.toLowerCase();
+		String ans = BSearch(lowerName);
+		return lowerName.equals(ans);
 	}
 }

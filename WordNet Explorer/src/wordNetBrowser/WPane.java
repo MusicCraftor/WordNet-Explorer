@@ -92,7 +92,7 @@ public class WPane extends JEditorPane {
 		//*/
 		JFrame jf = new JFrame();
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		WPane dog= new WPane("double");
+		WPane dog= new WPane("run");
 		dog.addHyperlinkListener(new HyperlinkAdapter(dog));
 		jf.add(dog);
 		JScrollPane jsp = new JScrollPane(dog);
