@@ -78,6 +78,11 @@ public class WPane extends JEditorPane {
 		setText(wdic.getT());
 		setSelectionStart(0);setSelectionEnd(0);
 	}
+	
+	public String getWord()
+	{
+		return wdic.getWord();
+	}
 	/*
 	 * hasWord
 	 * —∞’“µ•¥  «∑Ò¥Ê‘⁄

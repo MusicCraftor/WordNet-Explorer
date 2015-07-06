@@ -1,15 +1,21 @@
 package wordNetBrowser;
 
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import wordNetBrowser.WBrowser;
 
 public class WordNetBrowser
 {
-	private static final long serialVersionUID = -2350589821892652678L;
-
-	public WordNetBrowser()
+	public static void main(String[] args)
 	{
-		new WBrowser("Untitled");
+		WBrowser browser = new WBrowser("untitled", new Dimension(1080, 720));
+		browser.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
 	}
 }
