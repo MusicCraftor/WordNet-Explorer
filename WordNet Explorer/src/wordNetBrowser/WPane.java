@@ -52,6 +52,7 @@ public class WPane extends JEditorPane {
 		super.addHyperlinkListener(listener);
 	}
 	public void doWhenCalled(String t){
+		t=t.replaceAll(" ", "_");
 		if(t.contains(",")){
 			int i = Integer.parseInt(t.substring(0, t.indexOf(',')));
 			t = t.substring(1+t.indexOf(','));

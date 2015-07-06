@@ -335,6 +335,7 @@ public class WordDic {
 		return wordName;
 	}
 	public String[] getNextWords(String word,int length){
+		word = word.replaceAll(" ", "_");
 		int index = BSearch(word,0,wordsTop);
 		String ret[] = new String[length];
 		for(int i=0;i<length;++i){
@@ -418,7 +419,7 @@ public class WordDic {
 		return null;
 	}
 	public String BSearch(String name){
-		return words[BSearch(name,0,wordsTop)];
+		return words[BSearch(name,0,wordsTop)].replaceAll("_", " ");
 	}
 	int BSearch(String name,int start,int end){
 		int mid = (start+end)/2;
@@ -428,8 +429,9 @@ public class WordDic {
 		else return BSearch(name,start,mid);
 	}
 	public boolean hasWord(String name){
+		name = name.replaceAll(" ", "_");
 		String lowerName = name.toLowerCase();
-		String ans = BSearch(lowerName);
+		String ans = BSearch(lowerName).replaceAll(" ", "_");
 		return lowerName.equals(ans);
 	}
 }
