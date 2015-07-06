@@ -339,7 +339,7 @@ public class WordDic {
 		int index = BSearch(word,0,wordsTop);
 		String ret[] = new String[length];
 		for(int i=0;i<length;++i){
-			ret[i]=words[index+i];
+			ret[i]=words[index+i].replaceAll("_", " ");
 		}
 		return ret;
 	}

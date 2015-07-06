@@ -4,20 +4,27 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class WBrowser extends JFrame
+	implements ActionListener, KeyListener, ListSelectionListener, DocumentListener
 {
 	private static final long serialVersionUID = -9215627315037013394L;
 	
@@ -31,6 +38,8 @@ public class WBrowser extends JFrame
 	private static final double WORD_PANE_HEIGHT_RATIO = 1.0;
 	
 	private static final int WORD_INPUT_LENGTH = 15;
+	
+	private static final int SEARCH_LIST_CAPACITY = 100;
 	
 	public WBrowser(String title)
 	{
@@ -84,7 +93,7 @@ public class WBrowser extends JFrame
 		wordPanel = new WPane("", "res");
 		wordPanel.setPreferredSize(
 				new Dimension((int)(this.getWidth() * WORD_PANE_WIDTH_RATIO), (int)(this.getHeight() * WORD_PANE_HEIGHT_RATIO)));
-		wordPanel.setWord("run");
+		wordPanel.setWord("");
 		wordPanel.addHyperlinkListener(new HyperlinkListener(){
 			WPane list = wordPanel;
 			public void hyperlinkUpdate(HyperlinkEvent e) {
@@ -117,12 +126,18 @@ public class WBrowser extends JFrame
 		
 		wordInput.setFont(new Font("Couriers New", Font.BOLD, 16));
 		
+		wordInput.getDocument().addDocumentListener(this);
+		wordInput.addKeyListener(this);
+		
 		return wordInput;
 	}
 	
 	private JComponent initSearchList()
 	{
-		searchList = new JList< String >(wordPanel.getDic().getNextWords("run", 100));
+		searchList = new JList< String >(wordPanel.getDic().getNextWords("a", SEARCH_LIST_CAPACITY));
+		searchList.setSelectedIndex(0);
+		
+		searchList.addListSelectionListener(this);
 		
 		return new JScrollPane(searchList);
 	}
@@ -134,4 +149,84 @@ public class WBrowser extends JFrame
 	private JPanel searchPanel;
 	private JTextField wordInput;
 	private JList< String > searchList;
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e)
+	{
+		Object source = e.getSource();
+		if (source == searchList)
+		{
+			String word = searchList.getSelectedValue();
+			if (word != null)
+			{
+				wordPanel.setWord(word);
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) 
+	{
+		Object source = e.getSource();
+		int key = e.getKeyCode();
+		if (source == wordInput)
+		{
+			String text = wordInput.getText();
+			switch(key)
+			{
+			case KeyEvent.VK_ENTER:
+				searchList.setSelectedIndex(0);
+				wordPanel.setWord(searchList.getSelectedValue());
+				wordInput.setSelectionStart(0);
+				wordInput.setSelectionEnd(text.length());
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e)
+	{
+		if (e.getDocument() == wordInput.getDocument())
+		{
+			searchList.setListData(wordPanel.getDic().getNextWords(wordInput.getText(), SEARCH_LIST_CAPACITY));
+			//searchList.setSelectedIndex(0);
+		}
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e)
+	{
+		if (e.getDocument() == wordInput.getDocument())
+		{
+			searchList.setListData(wordPanel.getDic().getNextWords(wordInput.getText(), SEARCH_LIST_CAPACITY));
+			//searchList.setSelectedIndex(0);
+		}
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e)
+	{
+		
+	}
 }
