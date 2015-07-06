@@ -1,32 +1,38 @@
 package wordNetParser;
 
-import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
+
+import edu.mit.jwi.Dictionary;
+import edu.mit.jwi.IDictionary;
+import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.IPointer;
 import edu.mit.jwi.item.ISynset;
 import edu.mit.jwi.item.ISynsetID;
-import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.Pointer;
-import edu.mit.jwi.IDictionary;
-import edu.mit.jwi.Dictionary;
-
-import java.io.*;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.util.*;
-
+import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
-public class WnTextArea extends JEditorPane {
+import edu.mit.jwi.item.Pointer;
+
+public class WordDic {
 	Map<String, String> map;
 	IDictionary dict;
 	String wordName;
 	IIndexWord wordIndexArray[];
 	boolean showExample[][] ;
-	static final String[] POfS={"Noun","Verb","Adj","Adv"}; 
+	public static final String[] POfS={"Noun","Verb","Adj","Adv"}; 
 	public static final int nNOUN=0;
 	public static final int nVERB=1;
 	public static final int nADJ= 2;
@@ -64,16 +70,12 @@ public class WnTextArea extends JEditorPane {
 	public static final String[] TARRAY = new String[]{TSYNSET,TALSO_SEE,TANTONYM,TATTRIBUTE,TCAUSE,TDERIVATIONALLY_RELATED,TDERIVED_FROM_ADJ
 		,TDOMAIN,TENTAILMENT,THOLONYM_MEMBER,THOLONYM_PART,THOLONYM_SUBSTANCE,THYPERNYM,THYPERNYM_INSTANCE,THYPONYM,THYPONYM_INSTANCE,TMEMBER,TMERONYM_MEMBER
 		,TMERONYM_PART,TMERONYM_SUBSTANCE,TPARTICIPLE,TPERTAINYM,TREGION,TREGION_MEMBER,TSIMILAR_TO,TTOPIC,TTOPIC_MEMBER,TUSAGE,TUSAGE_MEMBER,TVERB_GROUP};
-	public WnTextArea(String wordname){
+	public WordDic(){
 		super();
-		initEditorPane();
-		initWord(wordname);
-		setText(getT());
-		setSelectionStart(0);setSelectionEnd(0);
-		this.setEditable(false);
-		this.setContentType("text/html");
+		initDic();
+		wordName = null;
 	}
-	protected void initWord(String wordname){
+	protected void setWord(String wordname){
 	//	System.out.println(wordname);
 		wordName = wordname;
 
@@ -85,9 +87,7 @@ public class WnTextArea extends JEditorPane {
 	    showExample = new boolean[4][100];
 	}
 	
-	void initEditorPane(){
-		this.setEditable(false);
-		this.setContentType("text/html");
+	void initDic(){
 		String wnhome = System.getenv("WNHOME");
 	    if(wnhome == null)System.out.println("can not get WNHOME environment path");
 	   // else System.out.println("The env arg is "+wnhome);
@@ -157,6 +157,7 @@ public class WnTextArea extends JEditorPane {
 		}
 	}
 	protected String getT(){
+		if(wordName==null)return "";
 		String ret = "<html><body>";
 		ret+= "<center><h1><b>"+wordName.replaceAll("_", " ")+"</b></h1></center>";
 		for(int i=0;i<4;++i){
@@ -176,7 +177,7 @@ public class WnTextArea extends JEditorPane {
 	String parseSynset(ISynset synset){
 		String ret = "";
 		if(synset.getWords().size()==1)return ret;
-		ret+="<p>Synset:&nbsp&nbsp&nbsp";
+		ret+="<p>Synsets:&nbsp&nbsp&nbsp";
 		for(IWord word:synset.getWords()){
 			String t=word.getLemma();
 			if(!t.equals(wordName)){
@@ -239,19 +240,6 @@ public class WnTextArea extends JEditorPane {
 		
 		return ret;
 	}
-	public static void main(String[] args){
-		//*/
-		JFrame jf = new JFrame();
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		WnTextArea dog= new WnTextArea("come_up");
-		dog.addHyperlinkListener(new HyperlinkAdapter(dog));
-		jf.add(dog);
-		JScrollPane jsp = new JScrollPane(dog);
-		jf.add(jsp);
-		jf.setVisible(true);
-		jf.setSize(700,400);
-		//*/
-	}
 	@SuppressWarnings("unchecked")
 	protected Map<String,String[]> getTMap(){
 		Map<String,String[]>ret = new HashMap<String, String[]>();
@@ -300,24 +288,6 @@ public class WnTextArea extends JEditorPane {
 		}
 		return ret;
 	};
-	protected void doWhenCalled(String t){
-		if(t.contains(",")){
-			int i = Integer.parseInt(t.substring(0, t.indexOf(',')));
-			t = t.substring(1+t.indexOf(','));
-			int j = Integer.parseInt(t);
-			showExample[i][j]=!showExample[i][j];//每次点击超链接时超链接会被点击两次(我也不知道为什么),本来bool型强行变成int
-			int val=0;
-			val = getSelectionStart();
-			setText(getT());
-			setSelectionStart(val);setSelectionEnd(val);
-		}
-		else{	
-			initWord(t);
-			setText(getT());
-			setSelectionStart(0);setSelectionEnd(0);
-		}
-		
-	}
 	private Map<String,Set<String>> getTMap(int nType,int nOrder,int n){
 		if(nType>=wordIndexArray.length)return null;
 		Map<String,Set<String>>ret = new HashMap<String, Set<String>>();
@@ -355,6 +325,17 @@ public class WnTextArea extends JEditorPane {
 		if((stemp = fillList(Pointer.USAGE,wordMap,synMap))!=null)ret.put(TUSAGE,stemp);
 		if((stemp = fillList(Pointer.USAGE_MEMBER,wordMap,synMap))!=null)ret.put(TUSAGE_MEMBER,stemp);
 		if((stemp = fillList(Pointer.VERB_GROUP,wordMap,synMap))!=null)ret.put(TVERB_GROUP,stemp);
+		List<IWord> synsetWords = dict.getSynset(wordID.getSynsetID()).getWords();
+		if(synsetWords.size()>1){
+			stemp = new TreeSet<String>();
+			for(IWord tword:synsetWords){
+				String tstr;
+				if((tstr=tword.getLemma())!=wordName){
+					stemp.add(tstr);
+				}
+			}
+			ret.put(TSYNSET, stemp);
+		}
 		return ret;
 	};
 	Set<String> fillList(Pointer ptype,Map<IPointer, List<IWordID>> wordMap,Map<IPointer, List<ISynsetID>> synMap){
@@ -382,31 +363,8 @@ public class WnTextArea extends JEditorPane {
 		if(!ts.isEmpty())return ts;
 		return null;
 	}
-	private static final long serialVersionUID = 1L;
-	/*	protected String[] getSyntex(String Type,int order){
-		int i;
-		for(i=0;i<POfS.length;++i)if(POfS[i]==Type)break;
-		if(i==POfS.length){System.out.println("Type error in getSyntex!!");return null;}
-		List<IWord> IDs = dict.getWord(wordIndexArray[i].getWordIDs().get(order)).getSynset().getWords() ;
-		int k = IDs.size();
-		String[] ret = new String[k];
-		for(int j=0;j<k;++j){
-			ret[j]=IDs.get(j).getLemma();
-		}
-		return ret;
-	}*/
-}
-class HyperlinkAdapter implements HyperlinkListener{
-	WnTextArea list;
-	HyperlinkAdapter(WnTextArea wa){
-		list = wa;
-	};
-	@Override
-	public void hyperlinkUpdate(HyperlinkEvent e) {
-	if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED){
-		String t = e.getDescription();
-		list.doWhenCalled(t);
-	}
-		
+	protected boolean hasWord(String name){
+		return dict.getIndexWord(name, POS.ADJECTIVE)!=null||dict.getIndexWord(name, POS.ADVERB)!=null||dict.getIndexWord(name,POS.NOUN)!=null
+				||dict.getIndexWord(name,POS.VERB)!=null;
 	}
 }
