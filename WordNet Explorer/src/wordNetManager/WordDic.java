@@ -74,8 +74,11 @@ public class WordDic {
 		,TDOMAIN,TENTAILMENT,THOLONYM_MEMBER,THOLONYM_PART,THOLONYM_SUBSTANCE,THYPERNYM,THYPERNYM_INSTANCE,THYPONYM,THYPONYM_INSTANCE,TMEMBER,TMERONYM_MEMBER
 		,TMERONYM_PART,TMERONYM_SUBSTANCE,TPARTICIPLE,TPERTAINYM,TREGION,TREGION_MEMBER,TSIMILAR_TO,TTOPIC,TTOPIC_MEMBER,TUSAGE,TUSAGE_MEMBER,TVERB_GROUP};
 	public WordDic(){
+		this(null);
+	}
+	public WordDic(String path){
 		super();
-		initDic();
+		initDic(path);
 		wordName = null;
 	}
 	public void setWord(String wordname){
@@ -90,8 +93,8 @@ public class WordDic {
 	    showExample = new boolean[4][100];
 	}
 	
-	void initDic(){
-		String wnhome = System.getenv("WNHOME");
+	void initDic(String wnhome){
+		if(wnhome == null)wnhome = System.getenv("WNHOME");
 	    if(wnhome == null)System.out.println("can not get WNHOME environment path");
 	   // else System.out.println("The env arg is "+wnhome);
 	    String path = wnhome + File.separator + "dict";

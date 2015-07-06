@@ -1,7 +1,5 @@
 package wordNetBrowser;
 
-import java.util.*;
-
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -11,15 +9,18 @@ import javax.swing.event.HyperlinkListener;
 import wordNetManager.WordDic;
 
 public class WPane extends JEditorPane {
-	public WPane(String wordname){
+	public WPane(String wordname,String path){
 		super();
-		initEditorPane();
+		initEditorPane(path);
 		initWord(wordname);
 		setText(wdic.getT());
 		setSelectionStart(0);
 		setSelectionEnd(0);
 		this.setEditable(false);
 		this.setContentType("text/html");
+	}
+	public WPane(String wordname){
+		this(wordname,null);
 	}
 	public WPane(){
 		this("");
@@ -154,10 +155,10 @@ public class WPane extends JEditorPane {
 			{wdic.setWord(wordname);}
 	}
 	
-	void initEditorPane(){
+	void initEditorPane(String path){
 		this.setEditable(false);
 		this.setContentType("text/html");
-		wdic = new WordDic();
+		wdic = new WordDic(path);
 	}
 }
 class HyperlinkAdapter implements HyperlinkListener{
