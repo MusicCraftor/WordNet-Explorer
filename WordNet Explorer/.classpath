@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_31"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JGraphX 3.3 Library"/>
+	<classpathentry kind="lib" path="res/lib/jgraphx.jar"/>
+	<classpathentry kind="lib" path="res/lib/edu.mit.jwi_2.3.3_jdk.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
