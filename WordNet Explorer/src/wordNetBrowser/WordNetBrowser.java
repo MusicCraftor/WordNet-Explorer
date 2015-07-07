@@ -10,7 +10,7 @@ public class WordNetBrowser
 {
 	public static void main(String[] args)
 	{
-		WBrowser browser = new WBrowser("untitled", new Dimension(1380, 840));
+		WBrowser browser = new WBrowser("WordNet Browser", new Dimension(1380, 840));
 		browser.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e)
 			{

@@ -3,14 +3,9 @@ package wordNetManager;
 import java.util.Hashtable;
 import java.util.Map;
 
-import javax.swing.SwingConstants;
-
-import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxCompactTreeLayout;
 import com.mxgraph.layout.mxStackLayout;
-import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.util.mxConstants;
-import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxStylesheet;
@@ -26,7 +21,6 @@ public class WordGraph
 	private static final int PARENT_ANTONYM = 2;
 	private static final int PARENT_EDGE = 3;
 
-	private static final int WIDTH_NEED_TO_RESIZE = 10;
 	private static final int HEIGHT_NEED_TO_RESIZE = 10;
 
 	private static final int WORD_BLOCK_WIDTH = 400;
@@ -34,7 +28,6 @@ public class WordGraph
 	private static final int BLOCK_BASE_HEIGHT = 60;
 	
 	private static final int WORD_TYPE_WIDTH = 350;
-	private static final int WORD_TYPE_HEIGHT = HEIGHT_NEED_TO_RESIZE;
 	private static final int WORD_TYPE_BASE_HEIGHT = 50;
 	
 	private static final int WORD_MEANING_WIDTH = 300;
