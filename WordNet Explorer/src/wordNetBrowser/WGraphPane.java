@@ -1,27 +1,22 @@
 package wordNetBrowser;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.swing.handler.mxCellTracker;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxEventSource;
-import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxGraph;
 
 import wordNetManager.WordGraph;
 
 public class WGraphPane extends JPanel
 {
+	private static final long serialVersionUID = -6821857086191550315L;
+	
 	public WGraphPane(WBrowser browser)
 	{
 		this(browser, null);
