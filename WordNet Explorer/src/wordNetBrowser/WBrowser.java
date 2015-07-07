@@ -34,7 +34,7 @@ public class WBrowser extends JFrame
 	private static final double GRAPH_PANE_WIDTH_RATIO = 0.6;
 	private static final double GRAPH_PANE_HEIGHT_RATIO = 1.0;
 
-	private static final double WORD_PANE_WIDTH_RATIO = 0.4;
+	private static final double WORD_PANE_WIDTH_RATIO = 0.6;
 	private static final double WORD_PANE_HEIGHT_RATIO = 1.0;
 	
 	private static final int WORD_INPUT_LENGTH = 15;
@@ -82,7 +82,7 @@ public class WBrowser extends JFrame
 	
 	private JComponent initGraphPane()
 	{
-		graphPanel = new WGraphPane(
+		graphPanel = new WGraphPane(this,
 				new Dimension((int)(this.getWidth() * GRAPH_PANE_WIDTH_RATIO), (int)(this.getHeight() * GRAPH_PANE_HEIGHT_RATIO)));
 		
 		return graphPanel;
@@ -149,6 +149,15 @@ public class WBrowser extends JFrame
 	private JPanel searchPanel;
 	private JTextField wordInput;
 	private JList< String > searchList;
+	
+	public void wordSelected(String word)
+	{
+		if (word != null)
+		{
+			wordPanel.setWord(word);
+			graphPanel.updateGraph(word, wordPanel);
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -163,10 +172,7 @@ public class WBrowser extends JFrame
 		if (source == searchList)
 		{
 			String word = searchList.getSelectedValue();
-			if (word != null)
-			{
-				wordPanel.setWord(word);
-			}
+			wordSelected(word);
 		}
 	}
 
@@ -188,7 +194,8 @@ public class WBrowser extends JFrame
 			{
 			case KeyEvent.VK_ENTER:
 				searchList.setSelectedIndex(0);
-				wordPanel.setWord(searchList.getSelectedValue());
+				String word = searchList.getSelectedValue();
+				wordSelected(word);
 				wordInput.setSelectionStart(0);
 				wordInput.setSelectionEnd(text.length());
 				break;

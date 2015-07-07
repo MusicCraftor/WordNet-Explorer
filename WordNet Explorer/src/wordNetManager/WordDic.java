@@ -214,6 +214,30 @@ public class WordDic {
 	public Map<String,String[]> getMap(){
 		return getTMap();
 	}
+	public String getMeaning(int nType, int order){
+		POS pos;
+		switch(nType){
+		case nNOUN:
+			pos = POS.NOUN;
+			break;
+		case nVERB:
+			pos = POS.VERB;
+			break;
+		case nADJ:
+			pos = POS.ADJECTIVE;
+			break;
+		case nADV:
+			pos = POS.ADVERB;
+			break;
+		default:
+			pos = POS.NOUN;
+			break;
+		}
+		String gloss = dict.getSynset(
+				dict.getIndexWord(wordName, pos).getWordIDs().get(order).getSynsetID()).getGloss();
+		int partitionIndex = gloss.indexOf('\"');
+		return gloss.substring(0, (partitionIndex < 0) ? gloss.length() : partitionIndex);
+	}
 	public Map<String,String[]> getMap(int nType,int order){
 		return getTMap(nType,order);
 	}
